@@ -1,0 +1,7 @@
+127.0.0.1 - - [11/Feb/2017:12:33:43 +0200] "GET / HTTP/1.1" 200 7154 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36"
+127.0.0.1 - - [11/Feb/2017:12:33:43 +0200] "GET /assets/47a9ac87/css/bootstrap.css HTTP/1.1" 200 146010 "http://show.bill/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36"
+127.0.0.1 - - [11/Feb/2017:12:33:43 +0200] "GET /css/site.css HTTP/1.1" 200 1842 "http://show.bill/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36"
+127.0.0.1 - - [11/Feb/2017:12:33:43 +0200] "GET /assets/6d30069d/jquery.js HTTP/1.1" 200 257551 "http://show.bill/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36"
+127.0.0.1 - - [11/Feb/2017:12:33:43 +0200] "GET /assets/2d4a3973/yii.js HTTP/1.1" 200 19877 "http://show.bill/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36"
+127.0.0.1 - - [11/Feb/2017:12:33:43 +0200] "GET /assets/47a9ac87/js/bootstrap.js HTTP/1.1" 200 69707 "http://show.bill/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36"
+127.0.0.1 - - [11/Feb/2017:12:33:43 +0200] "GET /index.php?r=debug%2Fdefault%2Ftoolbar&tag=589ee8878042b HTTP/1.1" 200 3284 "http://show.bill/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36"

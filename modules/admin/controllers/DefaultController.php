@@ -15,12 +15,6 @@ class DefaultController extends Controller
 {
     public $layout = 'admin';
 
-    public function beforeAction()
-    {
-        $this->view->registerJsFile('/js/admin.js', ['depends' => 'yii\web\JqueryAsset']);
-        return true;
-    }
-
     /**
      * @inheritdoc
      */

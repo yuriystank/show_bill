@@ -63,7 +63,7 @@ AppAsset::register($this);
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
     </div>
 </footer>
-
+<?=$this->registerJsFile('/js/admin.js', ['depends' => 'yii\web\JqueryAsset']);?>
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -1,2 +1,2 @@
-# show_bill
-Show bill test
+# test show_bill
+Test login/pass - admin/admin

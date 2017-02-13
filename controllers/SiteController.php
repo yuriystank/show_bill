@@ -2,57 +2,14 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
+use app\models\Area;
+use app\models\Event;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
     /**
      * Displays homepage.
      *
@@ -60,66 +17,52 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
-
-    /**
-     * Login action.
-     *
-     * @return string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
+        $dataProvider = new ActiveDataProvider([
+            'query' => Event::find()->where(['>=', 'date', date('Y-m-d h:i:s')])
+                ->orderBy(['date' => SORT_ASC])->with(['show', 'area']),
+            'pagination' => array('pageSize' => 9),
         ]);
+
+        return $this->render('index', compact('dataProvider'));
     }
 
+
     /**
-     * Logout action.
+     * Displays areas list.
      *
      * @return string
      */
-    public function actionLogout()
+    public function actionAreas()
     {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
+        $dataProvider = new ActiveDataProvider([
+            'query' => Area::find()->orderBy(['sort' => SORT_ASC]),
+            'pagination' => array('pageSize' => 12),
         ]);
+
+        return $this->render('area/index', compact('dataProvider'));
     }
 
     /**
-     * Displays about page.
+     * Displays areas list.
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionArea($id)
     {
-        return $this->render('about');
+        $model = Area::findOne($id);
+
+        if (!empty($model)) {
+
+            $dataProvider = new ActiveDataProvider([
+                'query' => Event::find()->where(['>=', 'date', date('Y-m-d h:i:s')])
+                    ->andWhere(['area_id' => $model->id])->orderBy(['date' => SORT_ASC])->with(['show', 'area']),
+                'pagination' => array('pageSize' => 9),
+            ]);
+
+            return $this->render('area/view', compact('model', 'dataProvider'));
+        } else {
+            throw new NotFoundHttpException('The requested area does not exist.');
+        }
     }
+
 }

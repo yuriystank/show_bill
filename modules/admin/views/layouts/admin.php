@@ -27,8 +27,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Мини-афиша',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => 'Мини-афиша (admin)',
+        'brandUrl' => ['/admin'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -36,27 +36,24 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'Плошадки', 'url' => ['/site/areas']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Вход', 'url' => ['/admin/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/admin/logout'], 'post')
-                . Html::submitButton(
-                    'Выход (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-                . '<li>'.Html::a('Админка', \yii\helpers\Url::to(['/admin'])).'</li>'
-            ),
+            ['label' => 'Сайт (главная)', 'url' => ['/site/index']],
+            ['label' => 'Плошадки', 'url' => ['/admin/area']],
+            ['label' => 'Шоу', 'url' => ['/admin/show']],
+            ['label' => 'События', 'url' => ['/admin/event']],
+            ['label' => 'Выход', 'url' => ['/admin/default/logout']],
         ],
     ]);
     NavBar::end();
     ?>
 
     <div class="container">
+        <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => Yii::t('yii', 'Dashboard'),
+                'url' => '/admin',
+            ],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
         <?= $content ?>
     </div>
 </div>
@@ -64,8 +61,6 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

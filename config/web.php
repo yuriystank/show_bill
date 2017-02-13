@@ -38,16 +38,25 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                'areas' => 'site/areas',
+                'area/<id:\d+>' => 'site/area',
+                'admin/<_a:(login|logout)>' => 'admin/default/<_a>',
+                '<_c:\w+>/<_a:\w+>'=>'<_c>/<_a>',
             ],
         ],
-        */
+
     ],
     'params' => $params,
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
